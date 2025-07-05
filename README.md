@@ -1,3 +1,3 @@
-# BlueSteps
+# Blue Steps
+Ocean sustainability habit tracker app with marine data integration.
 
-A fullstack marine exploration + eco-action tracking app.
