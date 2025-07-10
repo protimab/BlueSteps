@@ -10,14 +10,14 @@ class User(Base):
     email = Column(String, unique=True, index=True, nullable=False)
     hashed_password = Column(String, nullable=False)
 
-    habits = relationship("Habit", back_populates="owner")
+    habits = relationship("Habit", back_populates="owner") #one user can have many habits
 
 class Habit(Base):
     __tablename__ = "habits"
 
-    id = Column(Integer, primary_key=True, index=True)
-    description = Column(String, nullable=False)
-    timestamp = Column(DateTime, default=datetime.utcnow)
-    owner_id = Column(Integer, ForeignKey("users.id"))
+    id = Column(Integer, primary_key=True, index=True) #unique ID for each habit
+    description = Column(String, nullable=False) #the habit
+    timestamp = Column(DateTime, default=datetime.utcnow) #time
+    owner_id = Column(Integer, ForeignKey("users.id")) #user link
 
-    owner = relationship("User", back_populates="habits")
+    owner = relationship("User", back_populates="habits") #connect User and habits
