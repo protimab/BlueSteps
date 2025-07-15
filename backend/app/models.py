@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, ForeignKey, DateTime
+from sqlalchemy import Column, Integer, String, ForeignKey, DateTime, Date
 from sqlalchemy.orm import relationship
 from datetime import datetime
 from .db import Base
@@ -19,5 +19,13 @@ class Habit(Base):
     description = Column(String, nullable=False) #the habit
     timestamp = Column(DateTime, default=datetime.utcnow) #time
     owner_id = Column(Integer, ForeignKey("users.id")) #user link
-
+    checkins = relationship("HabitCheckIn", back_populates="habit", cascade="all, delete")
     owner = relationship("User", back_populates="habits") #connect User and habits
+
+class HabitCheckIn(Base):
+    __tablename__ = "habit_checkins"
+
+    id = Column(Integer, primary_key=True, index=True)
+    date = Column(Date, default=datetime.utcnow)
+    habit_id = Column(Integer, ForeignKey("habits.id"))
+    habit = relationship("Habit", back_populates="checkins")
