@@ -1,4 +1,6 @@
 from pydantic import BaseModel
+from datetime import date
+from typing import List, Optional
 
 class UserCreate(BaseModel):
     email: str
@@ -10,9 +12,19 @@ class HabitBase(BaseModel):
 class HabitCreate(HabitBase): #what the frontend sends
     pass
 
-class Habit(HabitBase): #what the backend returns
+class HabitCheckIn(BaseModel):
     id: int
-    owner_id: int
+    date: date
+    habit_id: int
 
     class Config:
         orm_mode = True
+
+class Habit(HabitBase): #what the backend returns
+    id: int
+    owner_id: int
+    checkins: List[HabitCheckIn] = []
+
+    class Config:
+        orm_mode = True
+

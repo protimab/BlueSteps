@@ -1,6 +1,6 @@
 from sqlalchemy import Column, Integer, String, ForeignKey, DateTime, Date
 from sqlalchemy.orm import relationship
-from datetime import datetime
+from datetime import datetime, date
 from .db import Base
 
 class User(Base):
@@ -10,22 +10,22 @@ class User(Base):
     email = Column(String, unique=True, index=True, nullable=False)
     hashed_password = Column(String, nullable=False)
 
-    habits = relationship("Habit", back_populates="owner") #one user can have many habits
+    habits = relationship("Habit", back_populates="owner")  # One user has many habits
 
 class Habit(Base):
     __tablename__ = "habits"
 
-    id = Column(Integer, primary_key=True, index=True) #unique ID for each habit
-    description = Column(String, nullable=False) #the habit
-    timestamp = Column(DateTime, default=datetime.utcnow) #time
-    owner_id = Column(Integer, ForeignKey("users.id")) #user link
+    id = Column(Integer, primary_key=True, index=True)
+    description = Column(String, nullable=False)
+    timestamp = Column(DateTime, default=datetime.utcnow)
+    owner_id = Column(Integer, ForeignKey("users.id"))
     checkins = relationship("HabitCheckIn", back_populates="habit", cascade="all, delete")
-    owner = relationship("User", back_populates="habits") #connect User and habits
+    owner = relationship("User", back_populates="habits")
 
 class HabitCheckIn(Base):
     __tablename__ = "habit_checkins"
 
     id = Column(Integer, primary_key=True, index=True)
-    date = Column(Date, default=datetime.utcnow)
+    date = Column(Date, default=date.today)
     habit_id = Column(Integer, ForeignKey("habits.id"))
     habit = relationship("Habit", back_populates="checkins")
