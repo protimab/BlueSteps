@@ -22,6 +22,10 @@ export default function HabitCheckinsMap() {
         <Marker key={idx} position={[Math.random() * 90, Math.random() * 180]}>
           <Popup>
             <b>{description}</b> <br /> Checked in on: {date}
+              <br />
+              <i>Sea Temp:</i> {checkin.ocean_data?.sea_temp || "n/a"} <br />
+              <i>Wind:</i> {checkin.ocean_data?.wind_speed || "n/a"} <br />
+              <i>Waves:</i> {checkin.ocean_data?.wave_height || "n/a"}
           </Popup>
         </Marker>
       ))}

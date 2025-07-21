@@ -5,6 +5,7 @@ from typing import List
 
 from app import models, db, auth, schemas
 from app.db import get_db
+from app.ocean import fetch_marine_data
 from datetime import date
 
 app = FastAPI()
@@ -82,4 +83,12 @@ def checkin_habit(habit_id: int, db: Session = Depends(get_db), current_user: mo
     db.add(checkin)
     db.commit()
     db.refresh(checkin)
-    return {"message": "Check-in recorded", "date": checkin.date}
+
+    ocean_data = fetch_marine_data()  # TODO: pass coordinates or station ID
+
+    return {
+        "message": "Check-in recorded",
+        "date": checkin.date,
+        "habit_id": habit.id,
+        "ocean_data": ocean_data,
+    }
