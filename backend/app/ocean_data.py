@@ -1,12 +1,12 @@
 import requests
 
-def fetch_marine_data(lat=34.0, lon=-120.0):
+def fetch_marine_data(lat=20.0, lon=-157.0):
     url = "https://marine-api.open-meteo.com/v1/marine"
     params = {
-        "latitude": lat,
-        "longitude": lon,
-        "hourly": "wave_height,wave_direction,wind_speed,water_temperature",
-        "timezone": "auto"
+       "latitude": lat,
+       "longitude": lon,
+       "hourly": ["wave_height"],
+       "timezone": "auto"
     }
 
     try:
@@ -19,11 +19,9 @@ def fetch_marine_data(lat=34.0, lon=-120.0):
 
         latest = {
             "wave_height": data["hourly"]["wave_height"][0],
-            "wind_speed": data["hourly"]["wind_speed"][0],
-            "water_temperature": data["hourly"]["water_temperature"][0],
         }
         return latest
 
-    except Exception as e:
-        print("Error fetching marine data:", e)
+    except requests.exceptions.HTTPError as e:
+        print("API responded with error:", e.response.text)
         return {}

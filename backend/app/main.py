@@ -91,3 +91,7 @@ def checkin_habit(habit_id: int, db: Session = Depends(get_db), current_user: mo
         "date": checkin.date,
         "marine_data": marine_data
     }
+
+@app.get("/ocean-data/")
+def get_ocean_data():
+    return fetch_marine_data()

@@ -26,5 +26,5 @@ class Habit(HabitBase): #what the backend returns
     checkins: List[HabitCheckIn] = []
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
