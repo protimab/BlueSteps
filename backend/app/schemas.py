@@ -5,6 +5,7 @@ from typing import List, Optional
 class UserCreate(BaseModel):
     email: str
     password: str
+    name: str  
 
 class HabitBase(BaseModel):
     description: str

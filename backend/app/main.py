@@ -1,5 +1,6 @@
 from fastapi import FastAPI, Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordRequestForm
+from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 from typing import List
 
@@ -10,8 +11,24 @@ from datetime import date
 
 app = FastAPI()
 
+origins = [
+    "http://localhost:3000", 
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"], 
+    allow_headers=["*"],
+)
+
 # create all tables 
 models.Base.metadata.create_all(bind=db.engine)
+
+@app.get("/")
+def read_root():
+    return {"message": "Welcome to Blue Steps API!"}
 
 # login and access token
 @app.post("/token")
@@ -25,16 +42,20 @@ async def login(form_data: OAuth2PasswordRequestForm = Depends(), db: Session = 
 #for user sign up
 @app.post("/users/signup", status_code=status.HTTP_201_CREATED)
 def signup(user: schemas.UserCreate, db: Session = Depends(get_db)):
-    existing_user = db.query(models.User).filter(models.User.email == user.email).first()
-    if existing_user:
-        raise HTTPException(status_code=400, detail="Email already registered")
+    try:
+        existing_user = db.query(models.User).filter(models.User.email == user.email).first()
+        if existing_user:
+            raise HTTPException(status_code=400, detail="Email already registered")
 
-    hashed_password = auth.get_password_hash(user.password)
-    new_user = models.User(email=user.email, hashed_password=hashed_password)
-    db.add(new_user)
-    db.commit()
-    db.refresh(new_user)
-    return {"id": new_user.id, "email": new_user.email}
+        hashed_password = auth.get_password_hash(user.password)
+        new_user = models.User(email=user.email, hashed_password=hashed_password, name=user.name)
+        db.add(new_user)
+        db.commit()
+        db.refresh(new_user)
+        return {"id": new_user.id, "email": new_user.email, "name": new_user.name}
+    except Exception as e:
+        print("Signup error:", e)
+        raise
 
 # for creating the users habits
 @app.post("/habits/", response_model=schemas.Habit)

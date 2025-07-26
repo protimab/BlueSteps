@@ -15,3 +15,9 @@ export async function createHabit(description) {
 export async function deleteHabit(habitId) {
   await api.delete(`/habits/${habitId}`);
 }
+
+export async function checkinHabit(habitId) {
+  const res = await api.post(`/habits/${habitId}/checkin`);
+  return res.data;  
+}
+

@@ -1,9 +1,13 @@
 import api from "../api/api";
 
-export async function signup(email, password) {
-  return api.post("/users/signup", null, {
-    params: { email, password },
+export async function signup(email, password, name) {
+  await api.post("/users/signup", {
+    email,
+    password,
+    name
   });
+  
+  return await login(email, password);
 }
 
 export async function login(email, password) {
