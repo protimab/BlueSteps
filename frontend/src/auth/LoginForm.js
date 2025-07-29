@@ -322,7 +322,7 @@ export default function LoginForm({ onLoginSuccess = () => {}, switchToSignup = 
         `}
       </style>
       
-      {/* Enhanced Ocean Animations */}
+      {/* Ocean Animations */}
       <div style={{
         position: 'absolute',
         top: 0,
@@ -333,7 +333,7 @@ export default function LoginForm({ onLoginSuccess = () => {}, switchToSignup = 
         pointerEvents: 'none',
         zIndex: 1
       }}>
-        {/* Floating Jellyfish */}
+        {/* Jellyfish */}
         <div style={{
           position: 'absolute',
           top: '15%',
@@ -358,7 +358,7 @@ export default function LoginForm({ onLoginSuccess = () => {}, switchToSignup = 
           🪼
         </div>
         
-        {/* Majestic Whale */}
+        {/* Whale */}
         <div style={{
           position: 'absolute',
           top: '30%',
@@ -370,7 +370,7 @@ export default function LoginForm({ onLoginSuccess = () => {}, switchToSignup = 
           🐋
         </div>
         
-        {/* Dancing Octopus */}
+        {/* Octopus */}
         <div style={{
           position: 'absolute',
           top: '45%',
@@ -395,7 +395,7 @@ export default function LoginForm({ onLoginSuccess = () => {}, switchToSignup = 
           🐙
         </div>
         
-        {/* Bouncing Shells */}
+        {/* Shells */}
         <div style={{
           position: 'absolute',
           bottom: '20%',
@@ -420,7 +420,7 @@ export default function LoginForm({ onLoginSuccess = () => {}, switchToSignup = 
           🐚
         </div>
         
-        {/* School of Fish */}
+        {/* Fish */}
         <div style={{
           position: 'absolute',
           top: '55%',
@@ -454,7 +454,7 @@ export default function LoginForm({ onLoginSuccess = () => {}, switchToSignup = 
           🐡
         </div>
         
-        {/* Rising Bubbles */}
+        {/* Bubbles */}
         <div style={{
           position: 'absolute',
           left: '18%',
@@ -495,7 +495,7 @@ export default function LoginForm({ onLoginSuccess = () => {}, switchToSignup = 
           🫧
         </div>
         
-        {/* Swaying Coral Garden */}
+        {/* Corals */}
         <div style={{
           position: 'absolute',
           bottom: 0,
@@ -535,7 +535,7 @@ export default function LoginForm({ onLoginSuccess = () => {}, switchToSignup = 
           🪸
         </div>
         
-        {/* Flowing Seaweed */}
+        {/* Seaweed */}
         <div style={{
           position: 'absolute',
           bottom: 0,
@@ -562,7 +562,7 @@ export default function LoginForm({ onLoginSuccess = () => {}, switchToSignup = 
           🌿
         </div>
         
-        {/* Animated Waves */}
+        {/* Waves */}
         <div style={{
           position: 'absolute',
           top: '10%',
