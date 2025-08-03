@@ -1,15 +1,43 @@
-# Node.js (frontend)
+# frontend
 frontend/node_modules/
+frontend/build/
 frontend/.next/
 frontend/.env
+frontend/.env.local
+frontend/npm-debug.log*
+frontend/yarn-debug.log*
+frontend/yarn-error.log*
 
-# Python (backend)
+frontend/coverage/
+frontend/*.log
+
+# backend
 backend/venv/
 backend/__pycache__/
-backend/*.pyc
+backend/**/*.pyc
 backend/.env
+backend/.env.*
 
-# General
+backend/.mypy_cache/
+backend/.pytest_cache/
+backend/.pylint.d/
+backend/*.log
+
+backend/*.sqlite3
+backend/*.db
+backend/*.pid
+
+#General 
 .DS_Store
 .vscode/
 .idea/
+*.swp
+*.swo
+*.bak
+*.tmp
+*.old
+*.orig
+
+*.log
+*.backup
+*.~undo-tree*
