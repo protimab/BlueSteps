@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Eye, EyeOff, Waves, Mail, Lock } from "lucide-react";
+import { login } from "./auth";
 
 export default function LoginForm({ onLoginSuccess = () => {}, switchToSignup = () => {} }) {
   const [email, setEmail] = useState("");
@@ -14,10 +15,11 @@ export default function LoginForm({ onLoginSuccess = () => {}, switchToSignup = 
     setIsLoading(true);
     
     try {
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      await login(email, password);
       onLoginSuccess();
     } catch {
-      setError("Login failed. Please check your credentials.");
+      setError("Login failed. Please check your credentials!");
+      console.error("Login error:", err);
     } finally {
       setIsLoading(false);
     }

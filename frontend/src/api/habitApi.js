@@ -6,9 +6,12 @@ export async function fetchHabits() {
 }
 
 export async function createHabit(description) {
-  const res = await api.post("/habits/", null, {
-    params: { description },
-  });
+  const res = await api.post("/habits/", { description });
+  return res.data;
+}
+
+export async function updateHabit(habitId, description) {
+  const res = await api.put(`/habits/${habitId}`, { description });
   return res.data;
 }
 
@@ -20,4 +23,3 @@ export async function checkinHabit(habitId) {
   const res = await api.post(`/habits/${habitId}/checkin`);
   return res.data;  
 }
-
