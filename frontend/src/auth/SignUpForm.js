@@ -28,7 +28,7 @@ export default function SignupForm({ onSignupSuccess = () => {}, switchToLogin =
   return (
     <div className="min-h-screen bg-gradient-to-br from-cyan-500 via-cyan-600 to-cyan-800 flex items-center justify-center p-6">
       <div className="w-full max-w-md">
-        {/* Header */}
+        {/* header */}
         <div className="text-center mb-8">
           <div className="w-12 h-12 bg-gradient-to-br from-cyan-600 to-cyan-400 rounded-xl flex items-center justify-center mx-auto mb-4 shadow-lg">
             <Anchor size={24} className="text-white" />
@@ -37,7 +37,7 @@ export default function SignupForm({ onSignupSuccess = () => {}, switchToLogin =
           <p className="text-white/80 text-base">Start your ocean conservation adventure</p>
         </div>
 
-        {/* Signup Card */}
+        {/*signup bg */}
         <div className="bg-white rounded-2xl shadow-xl p-8">
           <div className="text-center mb-6">
             <h2 className="text-2xl font-semibold text-slate-800 mb-2">Create Your Account</h2>
@@ -45,7 +45,7 @@ export default function SignupForm({ onSignupSuccess = () => {}, switchToLogin =
           </div>
 
           <div className="space-y-5">
-            {/* Full Name */}
+            {/* name */}
             <div className="space-y-2">
               <label className="block text-sm font-medium text-gray-700">Full Name</label>
               <div className="relative">
@@ -63,7 +63,7 @@ export default function SignupForm({ onSignupSuccess = () => {}, switchToLogin =
               </div>
             </div>
 
-            {/* Email */}
+            {/*email */}
             <div className="space-y-2">
               <label className="block text-sm font-medium text-gray-700">Email</label>
               <div className="relative">
@@ -81,7 +81,7 @@ export default function SignupForm({ onSignupSuccess = () => {}, switchToLogin =
               </div>
             </div>
 
-            {/* Password */}
+            {/* password */}
             <div className="space-y-2">
               <label className="block text-sm font-medium text-gray-700">Password</label>
               <div className="relative">
@@ -106,14 +106,14 @@ export default function SignupForm({ onSignupSuccess = () => {}, switchToLogin =
               </div>
             </div>
 
-            {/* Error */}
+            {/* error */}
             {error && (
               <div className="bg-red-50 border border-red-200 rounded-lg p-3 text-red-600 text-sm">
                 {error}
               </div>
             )}
 
-            {/* Signup Button */}
+            {/* signup button */}
             <button
               type="button"
               onClick={handleSubmit}
@@ -131,7 +131,7 @@ export default function SignupForm({ onSignupSuccess = () => {}, switchToLogin =
             </button>
           </div>
 
-          {/* Login Link */}
+          {/* login */}
           <div className="mt-6 pt-6 border-t border-slate-100 text-center">
             <p className="text-sm text-slate-600">
               Already have an account?{" "}
@@ -145,7 +145,7 @@ export default function SignupForm({ onSignupSuccess = () => {}, switchToLogin =
           </div>
         </div>
 
-        {/* Footer */}
+        {/* footer */}
         <div className="text-center mt-6">
           <p className="text-xs text-white/70">
             Join thousands making a difference for our oceans

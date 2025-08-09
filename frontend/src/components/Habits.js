@@ -75,7 +75,6 @@ export default function Habits() {
         Your Ocean Habits
       </h2>
 
-      {/* new habit */}
       <form onSubmit={handleAddHabit} className="mb-6">
         <div className="flex gap-2">
           <input
@@ -95,7 +94,6 @@ export default function Habits() {
         </div>
       </form>
 
-      {/* habits */}
       {habits.length === 0 ? (
         <div className="text-center py-8 text-gray-500">
           <Waves size={48} className="mx-auto mb-4 text-gray-300" />
@@ -130,7 +128,6 @@ export default function Habits() {
         </div>
       )}
 
-      {/* Marine Data */}
       {marineData && (
         <div className="mt-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
           <h3 className="font-semibold text-blue-800 mb-2 flex items-center">

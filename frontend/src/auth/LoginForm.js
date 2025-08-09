@@ -28,7 +28,7 @@ export default function LoginForm({ onLoginSuccess = () => {}, switchToSignup = 
   return (
     <div className="min-h-screen bg-gradient-to-br from-sky-500 via-sky-600 to-sky-800 flex items-center justify-center p-6">
       <div className="w-full max-w-md">
-        {/* Header */}
+        {/* header */}
         <div className="text-center mb-8">
           <div className="w-12 h-12 bg-gradient-to-br from-blue-800 to-cyan-600 rounded-xl flex items-center justify-center mx-auto mb-4 shadow-lg">
             <Waves size={24} className="text-white" />
@@ -37,7 +37,7 @@ export default function LoginForm({ onLoginSuccess = () => {}, switchToSignup = 
           <p className="text-white/80 text-base">Ocean sustainability at your fingertips</p>
         </div>
 
-        {/* Login Card */}
+        {/* login bg */}
         <div className="bg-white rounded-2xl shadow-xl p-8">
           <div className="text-center mb-6">
             <h2 className="text-2xl font-semibold text-slate-800 mb-2">Welcome back</h2>
@@ -45,7 +45,7 @@ export default function LoginForm({ onLoginSuccess = () => {}, switchToSignup = 
           </div>
 
           <div className="space-y-5">
-            {/* Email */}
+            {/* email */}
             <div className="space-y-2">
               <label className="block text-sm font-medium text-gray-700">Email</label>
               <div className="relative">
@@ -63,7 +63,7 @@ export default function LoginForm({ onLoginSuccess = () => {}, switchToSignup = 
               </div>
             </div>
 
-            {/* Password */}
+            {/* password */}
             <div className="space-y-2">
               <label className="block text-sm font-medium text-gray-700">Password</label>
               <div className="relative">
@@ -88,14 +88,14 @@ export default function LoginForm({ onLoginSuccess = () => {}, switchToSignup = 
               </div>
             </div>
 
-            {/* Error */}
+            {/* error */}
             {error && (
               <div className="bg-red-50 border border-red-200 rounded-lg p-3 text-red-600 text-sm">
                 {error}
               </div>
             )}
 
-            {/* Login Button */}
+            {/* login */}
             <button
               type="button"
               onClick={handleSubmit}
@@ -113,7 +113,7 @@ export default function LoginForm({ onLoginSuccess = () => {}, switchToSignup = 
             </button>
           </div>
 
-          {/* Sign Up Link */}
+          {/* sign up */}
           <div className="mt-6 pt-6 border-t border-slate-100 text-center">
             <p className="text-sm text-slate-600">
               Don't have an account?{" "}
@@ -127,7 +127,7 @@ export default function LoginForm({ onLoginSuccess = () => {}, switchToSignup = 
           </div>
         </div>
 
-        {/* Footer */}
+        {/* footer */}
         <div className="text-center mt-6">
           <p className="text-xs text-white/70">
             Join the community dedicated to ocean sustainability
