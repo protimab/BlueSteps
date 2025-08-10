@@ -17,7 +17,7 @@ export default function LoginForm({ onLoginSuccess = () => {}, switchToSignup = 
     try {
       await login(email, password);
       onLoginSuccess();
-    } catch {
+    } catch(err) {
       setError("Login failed. Please check your credentials!");
       console.error("Login error:", err);
     } finally {

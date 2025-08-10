@@ -17,6 +17,9 @@ class HabitCheckIn(BaseModel):
     id: int
     date: date
     habit_id: int
+    latitude: Optional[float] = None
+    longitude: Optional[float] = None
+    habit_description: Optional[str] = None
 
     class Config:
         orm_mode = True
@@ -27,5 +30,9 @@ class Habit(HabitBase): #what the backend returns
     checkins: List[HabitCheckIn] = []
 
     class Config:
-        from_attributes = True
+        orm_mode = True
+
+class HabitCheckInCreate(BaseModel):
+    latitude: Optional[float] = None
+    longitude: Optional[float] = None
 

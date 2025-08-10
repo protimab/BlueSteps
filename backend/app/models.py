@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, ForeignKey, DateTime, Date
+from sqlalchemy import Column, Integer, Float, String, ForeignKey, DateTime, Date
 from sqlalchemy.orm import relationship
 from datetime import datetime, date
 from .db import Base
@@ -29,4 +29,6 @@ class HabitCheckIn(Base):
     id = Column(Integer, primary_key=True, index=True)
     date = Column(Date, default=date.today)
     habit_id = Column(Integer, ForeignKey("habits.id"))
+    latitude = Column(Float, nullable=True)  
+    longitude = Column(Float, nullable=True) 
     habit = relationship("Habit", back_populates="checkins")

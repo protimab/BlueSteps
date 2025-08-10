@@ -19,7 +19,10 @@ export async function deleteHabit(habitId) {
   await api.delete(`/habits/${habitId}`);
 }
 
-export async function checkinHabit(habitId) {
-  const res = await api.post(`/habits/${habitId}/checkin`);
-  return res.data;  
+export async function checkinHabit(habitId, latitude = null, longitude = null) {
+  const res = await api.post(`/habits/${habitId}/checkin`, {
+    latitude,
+    longitude,
+  });
+  return res.data;
 }

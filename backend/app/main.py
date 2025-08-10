@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Depends, HTTPException, status
+from fastapi import FastAPI, Depends, HTTPException, status, Body
 from fastapi.security import OAuth2PasswordRequestForm
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
@@ -6,6 +6,7 @@ from typing import List
 
 from app import models, db, auth, schemas
 from app.db import get_db
+from app.schemas import HabitCheckInCreate 
 from app.ocean_data import fetch_marine_data
 from datetime import date
 
@@ -95,24 +96,49 @@ def delete_habit(habit_id: int, current_user: models.User = Depends(auth.get_cur
 
 #habit check in
 @app.post("/habits/{habit_id}/checkin")
-def checkin_habit(habit_id: int, db: Session = Depends(get_db), current_user: models.User = Depends(auth.get_current_user)):
+def checkin_habit(
+    habit_id: int, 
+    db: Session = Depends(get_db), 
+    checkin_data: HabitCheckInCreate = Body(...),
+    current_user: models.User = Depends(auth.get_current_user)):
     habit = db.query(models.Habit).filter_by(id=habit_id, owner_id=current_user.id).first()
     if not habit:
         raise HTTPException(status_code=404, detail="Habit not found")
 
-    checkin = models.HabitCheckIn(habit_id=habit.id, date=date.today())
+    checkin = models.HabitCheckIn(
+        habit_id=habit.id, 
+        date=date.today(),
+        latitude=checkin_data.latitude,
+        longitude=checkin_data.longitude,
+    )
     db.add(checkin)
     db.commit()
     db.refresh(checkin)
 
-    marine_data = fetch_marine_data()  # TODO: pass coordinates or station ID
+    marine_data = fetch_marine_data(lat=checkin.latitude, lon=checkin.longitude) 
 
     return {
         "message": "Check-in recorded",
         "date": checkin.date,
-        "marine_data": marine_data
+        "marine_data": marine_data,
+        "latitude": checkin.latitude,
+        "longitude": checkin.longitude,
+        "marine_data": marine_data,
     }
 
+#get habit check ins
+@app.get("/habits/checkins/", response_model=List[schemas.HabitCheckIn])
+def get_all_checkins(current_user: models.User = Depends(auth.get_current_user), db: Session = Depends(get_db)):
+    habits = db.query(models.Habit).filter(models.Habit.owner_id == current_user.id).all()
+    checkins = []
+    for habit in habits:
+        for checkin in habit.checkins:
+            checkin.habit_description = habit.description
+            checkins.append(checkin)
+    
+    return checkins
+
+#get ocean data
 @app.get("/ocean-data/")
 def get_ocean_data():
     return fetch_marine_data()

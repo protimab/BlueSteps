@@ -46,12 +46,27 @@ export default function Habits() {
   }
 
   async function handleCheckin(id) {
-    try {
-      const result = await checkinHabit(id);
-      setMarineData(result.marine_data);
-    } catch (error) {
-      console.error("Failed to check in:", error);
+    if (!navigator.geolocation) {
+      alert("Geolocation is not supported by your browser");
+      return;
     }
+
+    navigator.geolocation.getCurrentPosition(
+      async (position) => {
+        try {
+          const { latitude, longitude } = position.coords;
+          const result = await checkinHabit(id, latitude, longitude);
+          setMarineData(result.marine_data);
+        } catch (error) {
+          console.error("Failed to check in", error);
+          alert("Failed to check in. Please try again.");
+        }
+      },
+      (error) => {
+        alert("Could not find your location. Please allow location access and try again.");
+        console.error("Geolocation error:", error);
+      }
+    );
   }
 
   if (loading) {
