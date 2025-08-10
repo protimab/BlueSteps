@@ -61,11 +61,18 @@ def signup(user: schemas.UserCreate, db: Session = Depends(get_db)):
 # for creating the users habits
 @app.post("/habits/", response_model=schemas.Habit)
 def create_habit(habit: schemas.HabitCreate, current_user: models.User = Depends(auth.get_current_user), db: Session = Depends(get_db)):
-    new_habit = models.Habit(description=habit.description, owner_id=current_user.id)
-    db.add(new_habit)
-    db.commit()
-    db.refresh(new_habit)
-    return new_habit
+    try:
+        print(f"Creating habit with description: {habit.description}")
+        new_habit = models.Habit(description=habit.description, owner_id=current_user.id)
+        db.add(new_habit)
+        db.commit()
+        db.refresh(new_habit)
+        print(f"Successfully created habit with ID: {new_habit.id}")
+        return new_habit
+    except Exception as e:
+        print(f"Error creating habit: {e}")
+        db.rollback()
+        raise HTTPException(status_code=500, detail="Failed to create habit")
 
 # read current user habits
 @app.get("/habits/", response_model=List[schemas.Habit])
@@ -97,10 +104,13 @@ def delete_habit(habit_id: int, current_user: models.User = Depends(auth.get_cur
 #habit check in
 @app.post("/habits/{habit_id}/checkin")
 def checkin_habit(
-    habit_id: int, 
-    db: Session = Depends(get_db), 
+   habit_id: int, 
     checkin_data: HabitCheckInCreate = Body(...),
-    current_user: models.User = Depends(auth.get_current_user)):
+    current_user: models.User = Depends(auth.get_current_user),
+    db: Session = Depends(get_db)):
+    
+    print(f"Checking in habit {habit_id} with location: {checkin_data.latitude}, {checkin_data.longitude}")
+    
     habit = db.query(models.Habit).filter_by(id=habit_id, owner_id=current_user.id).first()
     if not habit:
         raise HTTPException(status_code=404, detail="Habit not found")

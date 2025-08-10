@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
-import api from "./api";
+import api from "../api/api";
 import L from "leaflet";
 
 function MapAutoBounds({ checkins }) {
@@ -54,16 +54,15 @@ export default function HabitCheckinsMap() {
       <MapAutoBounds checkins={checkins} />
       {checkins
       .filter(({ latitude, longitude }) => latitude !== null && longitude !== null && latitude !== 0 && longitude !== 0)
-      .map(({ habit_id, date, description, latitude, longitude, ocean_data }, idx) => (
-      <Marker key={idx} position={[latitude, longitude]}> 
+      .map(({ id, habit_id, date, habit_description, latitude, longitude }, idx) => (
+      <Marker key={id || idx} position={[latitude, longitude]}> 
         <Popup>
-          <b>{description}</b> <br /> Checked in on: {date}
-          <br />
-          <i>Sea Temp:</i> {ocean_data?.sea_temp || "n/a"} <br />
-          <i>Wind:</i> {ocean_data?.wind_speed || "n/a"} <br />
-          <i>Waves:</i> {ocean_data?.wave_height || "n/a"}
-        </Popup>
-      </Marker>
+              <b>{habit_description}</b> <br /> 
+              Checked in on: {date}
+              <br />
+              <i>Location:</i> {latitude.toFixed(4)}, {longitude.toFixed(4)}
+          </Popup>
+        </Marker>
     ))}
     </MapContainer>
   );
