@@ -175,16 +175,29 @@ export default function Habits() {
         <div className="mt-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
           <h3 className="font-semibold text-blue-800 mb-2 flex items-center">
             <Waves className="mr-2" size={20} />
-            Current Ocean Conditions
+            Ocean Conditions
           </h3>
 
-          {lastCheckinLocation && (
-          <div className="mb-3 text-sm text-blue-600 flex items-center">
-            <MapPin size={16} className="mr-1" />
-            Location: {lastCheckinLocation.latitude.toFixed(4)}, {lastCheckinLocation.longitude.toFixed(4)}
-          </div>
+        {lastCheckinLocation && (
+            <div className="mb-3 text-sm">
+              <div className="text-blue-600 flex items-center mb-1">
+                <MapPin size={16} className="mr-1" />
+                Your Location: {lastCheckinLocation.latitude.toFixed(4)}, {lastCheckinLocation.longitude.toFixed(4)}
+              </div>
+              {marineData.location_info && marineData.location_info.adjusted && (
+                <div className="text-amber-600 text-xs bg-amber-50 p-2 rounded">
+                  📍 Showing ocean data from nearest water body: <strong>{marineData.location_info.ocean_name}</strong> 
+                  ({marineData.location_info.distance_km}km away)
+                </div>
+              )}
+              {marineData.location_info && !marineData.location_info.adjusted && (
+                <div className="text-green-600 text-xs">
+                  🌊 You're at a coastal location with direct ocean access!
+                </div>
+              )}
+            </div>
           )}
-
+        
           <div className="grid grid-cols-1 md:grid-cols-3 gap-3 text-blue-700">
           <div className="flex items-center">
             <Waves className="mr-2 text-blue-500" size={16} />
